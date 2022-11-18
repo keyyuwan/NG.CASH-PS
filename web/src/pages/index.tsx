@@ -52,17 +52,17 @@ export default function Home() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  // const cookies = parseCookies(ctx);
-  // const token = cookies["@ngcash:token"];
+  const cookies = parseCookies(ctx);
+  const token = cookies["@ngcash:token"];
 
-  // if (!token) {
-  //   return {
-  //     redirect: {
-  //       destination: "/login",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {},
