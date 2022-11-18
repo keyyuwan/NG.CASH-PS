@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-export const TransferenceSectionContainer = styled.section`
-  @media (min-width: 1024px) {
-    max-width: 800px;
-  }
-`;
+export const TransferenceSectionContainer = styled.section``;
 
 export const TransferenceSectionTitle = styled.h2``;
 

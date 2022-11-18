@@ -31,6 +31,7 @@ interface AuthProviderProps {
 interface AuthContextData {
   user: User | null;
   signIn: ({ username, password }: SignInCredentials) => Promise<void>;
+  isAccountDataRefreshing: boolean;
   signOut: () => void;
   refreshAccountData: () => void;
 }
@@ -105,7 +106,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut, refreshAccountData }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        signIn,
+        signOut,
+        isAccountDataRefreshing,
+        refreshAccountData,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

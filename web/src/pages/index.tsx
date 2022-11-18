@@ -5,6 +5,7 @@ import { SignOut } from "phosphor-react";
 import { useTheme } from "styled-components";
 
 import { TransferenceSection } from "../components/Home/TransferenceSection";
+import { TransactionsSection } from "../components/Home/TransactionsSection";
 import { useAuth } from "../hooks/useAuth";
 import { mascaraBRL } from "../utils/masks";
 
@@ -43,6 +44,7 @@ export default function Home() {
         </Header>
         <Content>
           <TransferenceSection />
+          <TransactionsSection />
         </Content>
       </HomeContainer>
     </>
