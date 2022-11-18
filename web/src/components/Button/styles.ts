@@ -10,6 +10,10 @@ export const ButtonContainer = styled.button`
   font-size: 1.125rem;
   font-weight: 600;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   transition: filter 0.2s;
 
   &:hover {

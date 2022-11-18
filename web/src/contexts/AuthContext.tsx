@@ -32,6 +32,7 @@ interface AuthContextData {
   user: User | null;
   signIn: ({ username, password }: SignInCredentials) => Promise<void>;
   isAccountDataRefreshing: boolean;
+  isLoginIn: boolean;
   signOut: () => void;
   refreshAccountData: () => void;
 }
@@ -41,8 +42,11 @@ export const AuthContext = createContext({} as AuthContextData);
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isAccountDataRefreshing, setIsAccountDataRefreshing] = useState(false);
+  const [isLoginIn, setIsLoginIn] = useState(false);
 
   async function signIn({ username, password }: SignInCredentials) {
+    setIsLoginIn(true);
+
     try {
       const { data } = await api.post<SignInResponse>("/login", {
         username,
@@ -71,6 +75,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const error = err as AxiosError<{ error: string }>;
       console.log(error);
       toast.error(error.response?.data.error as string, toastOptions);
+    } finally {
+      setIsLoginIn(false);
     }
   }
 
@@ -113,6 +119,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         user,
         signIn,
         signOut,
+        isLoginIn,
         isAccountDataRefreshing,
         refreshAccountData,
       }}

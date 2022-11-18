@@ -23,7 +23,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signIn } = useAuth();
+  const { signIn, isLoginIn } = useAuth();
 
   async function handleSignIn(event: FormEvent) {
     event.preventDefault();
@@ -67,7 +67,7 @@ export default function Login() {
                 setPassword((event.target as HTMLInputElement).value)
               }
             />
-            <Button title="Entrar" type="submit" />
+            <Button title="Entrar" isLoading={isLoginIn} type="submit" />
           </Form>
 
           <GoToRegisterText>

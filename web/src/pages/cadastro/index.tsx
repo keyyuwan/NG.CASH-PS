@@ -26,9 +26,11 @@ import {
 export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isRegistering, setIsRegistering] = useState(false);
 
   async function handleRegister(event: FormEvent) {
     event.preventDefault();
+    setIsRegistering(true);
 
     try {
       await api.post("/register", {
@@ -41,6 +43,8 @@ export default function Register() {
       const error = err as AxiosError<{ error: string }>;
       console.log(error);
       toast.error(error.response?.data.error as string, toastOptions);
+    } finally {
+      setIsRegistering(false);
     }
   }
 
@@ -75,7 +79,7 @@ export default function Register() {
                 setPassword((event.target as HTMLInputElement).value)
               }
             />
-            <Button title="Cadastrar" type="submit" />
+            <Button title="Cadastrar" isLoading={isRegistering} type="submit" />
           </Form>
           <GoToLoginText>
             Já tem uma conta? <Link href="/login">Entre aqui</Link>

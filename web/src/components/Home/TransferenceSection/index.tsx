@@ -19,6 +19,7 @@ import { useAuth } from "../../../hooks/useAuth";
 export function TransferenceSection() {
   const [recipientUsername, setRecipientUsername] = useState("");
   const [value, setValue] = useState(0);
+  const [isTransfering, setIsTransfering] = useState(false);
 
   const { refreshAccountData } = useAuth();
 
@@ -32,6 +33,8 @@ export function TransferenceSection() {
   }
 
   async function handleTransfer() {
+    setIsTransfering(true);
+
     try {
       await api.post("/transfer", {
         recipientUsername,
@@ -48,6 +51,8 @@ export function TransferenceSection() {
       const error = err as AxiosError<{ error: string }>;
       console.log(error);
       toast.error(error.response?.data.error as string, toastOptions);
+    } finally {
+      setIsTransfering(false);
     }
   }
 
@@ -76,7 +81,12 @@ export function TransferenceSection() {
           value={mascaraBRL(value)}
           onChange={handleTransferenceValue}
         />
-        <Button title="Transferir" type="button" onClick={handleTransfer} />
+        <Button
+          title="Transferir"
+          isLoading={isTransfering}
+          type="button"
+          onClick={handleTransfer}
+        />
       </TransferenceForm>
     </TransferenceSectionContainer>
   );
