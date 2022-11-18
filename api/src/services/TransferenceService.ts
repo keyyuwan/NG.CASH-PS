@@ -32,6 +32,10 @@ export class TransferenceService {
       );
     }
 
+    if (value <= 0) {
+      throw new Error("Insira um valor para ser transferido.");
+    }
+
     const account = await prisma.account.findUnique({
       where: {
         id: accountId,

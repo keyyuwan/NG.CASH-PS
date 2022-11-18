@@ -75,3 +75,7 @@ export const PageImage = styled.img`
   width: 100%;
   height: 100%;
 `;
+
+export const GoToLoginText = styled.p`
+  margin-top: 1rem;
+`;

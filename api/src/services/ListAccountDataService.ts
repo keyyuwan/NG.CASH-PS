@@ -6,6 +6,14 @@ export class ListAccountDataService {
       where: {
         id: accountId,
       },
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+          },
+        },
+      },
     });
 
     return account;

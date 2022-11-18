@@ -11,6 +11,7 @@ interface User {
   id: string;
   username: string;
   accountId: string;
+  balance: number;
 }
 
 interface SignInResponse {
@@ -31,12 +32,14 @@ interface AuthContextData {
   user: User | null;
   signIn: ({ username, password }: SignInCredentials) => Promise<void>;
   signOut: () => void;
+  refreshAccountData: () => void;
 }
 
 export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
+  const [isAccountDataRefreshing, setIsAccountDataRefreshing] = useState(false);
 
   async function signIn({ username, password }: SignInCredentials) {
     try {
@@ -55,9 +58,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         id: user.id,
         username: user.username,
         accountId: user.accountId,
+        balance: user.balance,
       });
 
-      api.defaults.headers["Authorization"] = `Bearer ${token}`;
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       Router.push("/");
     } catch (err) {
@@ -72,17 +76,36 @@ export function AuthProvider({ children }: AuthProviderProps) {
     Router.push("/login");
   }
 
-  //   useEffect(() => {
-  //     const { "@ngcash:token": token } = parseCookies();
+  useEffect(() => {
+    const { "@ngcash:token": token } = parseCookies();
 
-  //     if (token) {
+    if (token) {
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-  //     }
+      api
+        .get("/account")
+        .then((response) => {
+          setUser({
+            id: response.data.user.id,
+            username: response.data.user.username,
+            accountId: response.data.id,
+            balance: response.data.balance,
+          });
+        })
+        .catch(() => {
+          signOut();
+        });
+    }
 
-  //   }, [])
+    setIsAccountDataRefreshing(false);
+  }, [isAccountDataRefreshing]);
+
+  function refreshAccountData() {
+    setIsAccountDataRefreshing(true);
+  }
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, signIn, signOut, refreshAccountData }}>
       {children}
     </AuthContext.Provider>
   );

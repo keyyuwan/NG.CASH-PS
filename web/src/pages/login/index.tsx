@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 import Head from "next/head";
+import Link from "next/link";
 
 import { Input } from "../../components/Form/Input";
 import { Button } from "../../components/Button";
@@ -15,6 +16,7 @@ import {
   Form,
   PageImageContainer,
   PageImage,
+  GoToRegisterText,
 } from "./styles";
 
 export default function Login() {
@@ -67,6 +69,11 @@ export default function Login() {
             />
             <Button title="Entrar" type="submit" />
           </Form>
+
+          <GoToRegisterText>
+            Ainda não tem uma conta?{" "}
+            <Link href="/cadastro">Cadastre-se aqui</Link>
+          </GoToRegisterText>
         </Content>
       </LoginContainer>
     </>

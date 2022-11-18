@@ -14,6 +14,13 @@ export class AuthUserService {
       where: {
         username,
       },
+      include: {
+        account: {
+          select: {
+            balance: true,
+          },
+        },
+      },
     });
 
     if (!user) {
@@ -41,6 +48,7 @@ export class AuthUserService {
       id: user.id,
       username: user.username,
       accountId: user.accountId,
+      balance: user.account?.balance,
     };
 
     return { token, userData };

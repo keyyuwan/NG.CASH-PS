@@ -75,3 +75,7 @@ export const Form = styled.form`
     margin-top: 2rem;
   }
 `;
+
+export const GoToRegisterText = styled.p`
+  margin-top: 1rem;
+`;

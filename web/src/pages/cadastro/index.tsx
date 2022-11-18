@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import Head from "next/head";
 import Router from "next/router";
+import Link from "next/link";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 
@@ -19,6 +20,7 @@ import {
   Title,
   Form,
   PageImageContainer,
+  GoToLoginText,
 } from "./styles";
 
 export default function Register() {
@@ -75,6 +77,9 @@ export default function Register() {
             />
             <Button title="Cadastrar" type="submit" />
           </Form>
+          <GoToLoginText>
+            Já tem uma conta? <Link href="/login">Entre aqui</Link>
+          </GoToLoginText>
         </Content>
         <PageImageContainer>
           <PageImage
