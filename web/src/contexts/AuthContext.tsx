@@ -65,6 +65,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       Router.push("/");
+
+      toast.success(`Bem vindo(a) @${user.username}`, toastOptions);
     } catch (err) {
       const error = err as AxiosError<{ error: string }>;
       console.log(error);
