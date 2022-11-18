@@ -79,7 +79,7 @@ export default function Register() {
         <PageImageContainer>
           <PageImage
             src={registerImage.src}
-            alt="Ilustração imprimindo dinheiro"
+            alt="Ilustração de um porquinho de moedas"
           />
         </PageImageContainer>
       </RegisterContainer>

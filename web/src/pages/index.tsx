@@ -1,7 +1,14 @@
+import Head from "next/head";
+
 export default function Home() {
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <>
+      <Head>
+        <title>NG.CASH</title>
+      </Head>
+      <div>
+        <h1>Página dos autenticados</h1>
+      </div>
+    </>
   );
 }
