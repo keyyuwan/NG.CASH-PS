@@ -7,6 +7,10 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
 
+    body {
+        background-color:${({ theme }) => theme.colors.background} ;
+    }
+
     body, input, textarea, button {
         font-size: 1rem;
         font-weight: 400;
