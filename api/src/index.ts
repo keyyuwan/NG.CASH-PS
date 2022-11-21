@@ -5,6 +5,9 @@ import "express-async-errors";
 import { router } from "./routes";
 import { errorMiddleware } from "./middlewares/error";
 
+const PORT = 3333;
+const HOST = "0.0.0.0";
+
 const app = express();
 
 app.use(cors());
@@ -13,4 +16,4 @@ app.use(router);
 
 app.use(errorMiddleware);
 
-app.listen(3333, () => console.log("Server running on port 3333"));
+app.listen(PORT, HOST, () => console.log("Server running on port 3333"));
