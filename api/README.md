@@ -6,7 +6,13 @@
 $ docker-compose up -d
 ```
 
-**2.** Dentro do diretório `/api`, inicialize o servidor:
+**2.** Dentro do diretório `/api`, instale as dependências:
+
+```
+$ npm install
+```
+
+**3.** Dentro do diretório `/api`, inicialize o servidor:
 
 ```
 $ npm run dev
