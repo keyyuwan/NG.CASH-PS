@@ -6,6 +6,11 @@ O teste deste processo seletivo consistiu em criar uma aplicação FullStack de 
 
 - Diretório **/api** - onde está todo o código Back-end da aplicação e instruções de como rodar
 
+## Overview:
+
+![Authentication GIF](./.github/assets/app-gif.gif)
+![App GIF](./.github/assets/app-gif-2.gif)
+
 ## Tecnologias
 
 ### 🖥️ Front-end:
